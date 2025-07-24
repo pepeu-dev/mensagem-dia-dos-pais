@@ -8,15 +8,26 @@
   <style>
     body {
       font-family: 'Rubik', sans-serif;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-      color: #fff;
       margin: 0;
       padding: 0;
+      background-image: url('https://images.unsplash.com/photo-1599059810555-c8859f3ed99b?auto=format&fit=crop&w=1400&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #fff;
+    }
+
+    .overlay {
+      background: rgba(0, 0, 0, 0.7);
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .container {
-      max-width: 500px;
-      margin: 40px auto;
+      max-width: 600px;
       background: rgba(255, 255, 255, 0.08);
       padding: 30px 25px;
       border-radius: 15px;
@@ -25,14 +36,31 @@
     }
 
     h1 {
-      font-size: 1.8em;
-      margin-bottom: 10px;
+      font-size: 2em;
+      margin-bottom: 25px;
+      color: #ffeb3b;
     }
 
-    p.contexto {
+    .mensagem-destaque {
+      font-size: 1.4em;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      animation: fadeIn 1.2s ease-in-out;
+      box-shadow: 0 0 10px #ffc10788;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .contexto {
       font-size: 1em;
       margin-bottom: 25px;
-      color: #cfd8dc;
+      color: #dfe6e9;
     }
 
     input[type="text"] {
@@ -62,7 +90,7 @@
     #linkGerado {
       margin-top: 20px;
       word-break: break-word;
-      color: #c5e1a5;
+      color: #aed581;
     }
 
     #botaoWhatsapp {
@@ -77,46 +105,34 @@
       display: inline-block;
     }
 
-    #areaMensagem p {
-      font-size: 1.2em;
-      margin: 20px 0;
-    }
-
-    .mensagem-destaque {
-      font-size: 1.4em;
-      margin: 30px 0;
-      color: #ffd54f;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 20px;
-      border-radius: 10px;
-      animation: fadeIn 1.2s ease-in-out;
-      box-shadow: 0 0 10px #ffd54f88;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    @media (max-width: 600px) {
+      .mensagem-destaque {
+        font-size: 1.2em;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Homenagem para o Dia dos Pais</h1>
-    <p class="contexto">
-      Crie uma mensagem personalizada para homenagear seu pai ou alguém especial neste Dia dos Pais.
-      Digite o nome abaixo e compartilhe o link via WhatsApp. Ele verá uma linda mensagem com o nome dele!
-    </p>
+  <div class="overlay">
+    <div class="container">
+      <h1>💙 Homenagem do Dia dos Pais</h1>
 
-    <div id="areaMensagem" style="display: none;">
-      <p id="mensagem" class="mensagem-destaque"></p>
-    </div>
+      <div id="areaMensagem" style="display: none;">
+        <p id="mensagem" class="mensagem-destaque"></p>
+      </div>
 
-    <div id="areaFormulario">
-      <input type="text" id="nomePai" placeholder="Digite o nome do seu pai">
-      <br />
-      <button onclick="gerarLink()">Gerar link</button>
-      <p id="linkGerado"></p>
-      <a id="botaoWhatsapp" target="_blank">📤 Compartilhar no WhatsApp</a>
+      <div id="areaFormulario">
+        <input type="text" id="nomePai" placeholder="Digite o nome do seu pai">
+        <br />
+        <button onclick="gerarLink()">Gerar link</button>
+        <p id="linkGerado"></p>
+        <a id="botaoWhatsapp" target="_blank">📤 Compartilhar no WhatsApp</a>
+      </div>
+
+      <p class="contexto">
+        Crie uma mensagem personalizada e emocionante para homenagear seu pai.  
+        Digite o nome, gere o link e compartilhe com quem sempre esteve do seu lado. 👨‍👧‍👦❤️
+      </p>
     </div>
   </div>
 
@@ -147,7 +163,12 @@
     const nomeURL = getParametroURL("nome");
     if (nomeURL) {
       const areaMensagem = document.getElementById("areaMensagem");
-      const mensagem = `${decodeURIComponent(nomeURL)}, neste Dia dos Pais, quero te lembrar o quanto você é incrível. Sua força, dedicação e amor moldaram quem eu sou. Obrigado por tudo! 💙👨‍👧‍👦 Feliz Dia dos Pais!`;
+      const nome = decodeURIComponent(nomeURL);
+      const mensagem = `💌 ${nome}, neste Dia dos Pais, quero te agradecer por tudo que fez e faz por mim.  
+      Sua força, seus conselhos e seu amor me tornaram quem eu sou.  
+      Você é meu exemplo, meu herói.  
+      Te amo demais! 👨‍👧‍👦❤️`;
+
       areaMensagem.style.display = "block";
       document.getElementById("mensagem").innerText = mensagem;
     }
