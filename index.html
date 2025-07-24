@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feliz Dia dos Pais</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #0066cc, #00cc99);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+    }
+
+    input[type="text"] {
+      width: 90%;
+      padding: 10px;
+      margin: 15px 0;
+      border: none;
+      border-radius: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #00cc99;
+      border: none;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #00a377;
+    }
+
+    #linkGerado {
+      margin-top: 15px;
+      word-break: break-word;
+    }
+
+    #botaoWhatsapp {
+      display: none;
+      margin-top: 15px;
+      padding: 10px 15px;
+      background: #25D366;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Mensagem do Dia dos Pais</h1>
+
+    <div id="areaMensagem" style="display: none;">
+      <p id="mensagem"></p>
+    </div>
+
+    <div id="areaFormulario">
+      <input type="text" id="nomePai" placeholder="Digite o nome do seu pai">
+      <button onclick="gerarLink()">Gerar link</button>
+      <p id="linkGerado"></p>
+      <a id="botaoWhatsapp" target="_blank">📤 Compartilhar no WhatsApp</a>
+    </div>
+  </div>
+
+  <script>
+    function getParametroURL(nome) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(nome);
+    }
+
+    function gerarLink() {
+      const nome = document.getElementById("nomePai").value.trim();
+      if (nome === "") {
+        alert("Digite o nome do seu pai.");
+        return;
+      }
+
+      const link = `${window.location.origin}${window.location.pathname}?nome=${encodeURIComponent(nome)}`;
+      document.getElementById("linkGerado").innerText = link;
+
+      const mensagem = `Veja essa mensagem para o Dia dos Pais:\n\n${link}`;
+      const whatsappLink = `https://wa.me/?text=${encodeURIComponent(mensagem)}`;
+
+      const botao = document.getElementById("botaoWhatsapp");
+      botao.href = whatsappLink;
+      botao.style.display = "inline-block";
+    }
+
+    // Mostrar mensagem direto se o link tiver o nome
+    const nomeURL = getParametroURL("nome");
+    if (nomeURL) {
+      const areaFormulario = document.getElementById("areaFormulario");
+      const areaMensagem = document.getElementById("areaMensagem");
+      const mensagem = `${decodeURIComponent(nomeURL)}, você é o melhor pai do mundo! Feliz Dia dos Pais! ❤️`;
+
+      areaFormulario.style.display = "none";
+      areaMensagem.style.display = "block";
+      document.getElementById("mensagem").innerText = mensagem;
+    }
+  </script>
+</body>
+</html>
