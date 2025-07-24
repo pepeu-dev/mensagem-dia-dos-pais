@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Homenagem Dia dos Pais</title>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Rubik', sans-serif;
@@ -42,11 +42,12 @@
     }
 
     .mensagem-destaque {
-      font-size: 1.6em;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8em;
       line-height: 1.8;
       margin: 30px 0;
       background: rgba(255, 255, 255, 0.1);
-      padding: 25px;
+      padding: 30px;
       border-radius: 12px;
       animation: fadeIn 1.2s ease-in-out;
       box-shadow: 0 0 14px #ffc107cc;
@@ -112,7 +113,7 @@
 
     @media (max-width: 600px) {
       .mensagem-destaque {
-        font-size: 1.2em;
+        font-size: 1.4em;
       }
     }
   </style>
@@ -165,15 +166,16 @@
       const link = `${window.location.origin}${window.location.pathname}?nome=${encodeURIComponent(nomePai)}&de=${encodeURIComponent(nomeRemetente)}`;
       document.getElementById("linkGerado").innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
 
-      const mensagem = `Veja essa mensagem especial do Dia dos Pais:\n\n${link}`;
+      const mensagem = `📨 ${nomeRemetente} preparou com muito carinho esta homenagem especial de Dia dos Pais para você 💌❤️:
+
+${link}`;
       const whatsappLink = `https://wa.me/?text=${encodeURIComponent(mensagem)}`;
 
       const botao = document.getElementById("botaoWhatsapp");
       botao.href = whatsappLink;
       botao.style.display = "inline-block";
 
-      // Mostrar pré-visualização
-      const previewTexto = `✉️ ${nomeRemetente} enviou esta mensagem para você, ${nomePai}:\n\n${nomePai}, neste Dia dos Pais, quero te agradecer por tudo que fez e faz por mim.\nSua força, seus conselhos e seu amor me tornaram quem eu sou.\nVocê é meu exemplo, meu herói.\n\nCom carinho, ${nomeRemetente}. 👨‍👧‍👦❤️`;
+      const previewTexto = `✉️ ${nomeRemetente} enviou esta mensagem para você, ${nomePai}:\n\n${nomePai}, neste Dia dos Pais, quero te agradecer por cada passo ao meu lado, por cada conselho silencioso e por todo o amor incondicional que me deu.\nVocê é a base da minha história, meu exemplo eterno. Que Deus te abençoe grandemente, hoje e sempre.\n\nCom amor e gratidão, ${nomeRemetente}. 👨‍👧‍👦❤️`;
       document.getElementById("previewTexto").innerText = previewTexto;
       document.getElementById("previsualizacao").style.display = "block";
     }
@@ -185,7 +187,7 @@
       const nomeRemetente = decodeURIComponent(nomeDeURL);
       const areaMensagem = document.getElementById("areaMensagem");
 
-      const mensagem = `✉️ ${nomeRemetente} enviou esta mensagem para você, ${nomePai}:\n\n${nomePai}, neste Dia dos Pais, quero te agradecer por tudo que fez e faz por mim.\nSua força, seus conselhos e seu amor me tornaram quem eu sou.\nVocê é meu exemplo, meu herói.\n\nCom carinho, ${nomeRemetente}. 👨‍👧‍👦❤️`;
+      const mensagem = `✉️ ${nomeRemetente} enviou esta mensagem para você, ${nomePai}:\n\n${nomePai}, neste Dia dos Pais, quero te agradecer por cada passo ao meu lado, por cada conselho silencioso e por todo o amor incondicional que me deu.\nVocê é a base da minha história, meu exemplo eterno. Que Deus te abençoe grandemente, hoje e sempre.\n\nCom amor e gratidão, ${nomeRemetente}. 👨‍👧‍👦❤️`;
 
       areaMensagem.style.display = "block";
       document.getElementById("mensagem").innerText = mensagem;
