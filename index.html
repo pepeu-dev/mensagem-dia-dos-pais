@@ -91,7 +91,7 @@
       }
 
       const link = `${window.location.origin}${window.location.pathname}?nome=${encodeURIComponent(nome)}`;
-      document.getElementById("linkGerado").innerText = link;
+      document.getElementById("linkGerado").innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
 
       const mensagem = `Veja essa mensagem para o Dia dos Pais:\n\n${link}`;
       const whatsappLink = `https://wa.me/?text=${encodeURIComponent(mensagem)}`;
@@ -101,14 +101,11 @@
       botao.style.display = "inline-block";
     }
 
-    // Mostrar mensagem direto se o link tiver o nome
     const nomeURL = getParametroURL("nome");
     if (nomeURL) {
-      const areaFormulario = document.getElementById("areaFormulario");
       const areaMensagem = document.getElementById("areaMensagem");
       const mensagem = `${decodeURIComponent(nomeURL)}, você é o melhor pai do mundo! Feliz Dia dos Pais! ❤️`;
 
-      areaFormulario.style.display = "none";
       areaMensagem.style.display = "block";
       document.getElementById("mensagem").innerText = mensagem;
     }
