@@ -1,69 +1,95 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feliz Dia dos Pais</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Homenagem Dia dos Pais</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #0066cc, #00cc99);
+      font-family: 'Rubik', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
       color: #fff;
       margin: 0;
       padding: 0;
     }
 
     .container {
-      max-width: 400px;
-      margin: 50px auto;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 20px;
+      max-width: 500px;
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 30px 25px;
       border-radius: 15px;
       text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 10px;
+    }
+
+    p.contexto {
+      font-size: 1em;
+      margin-bottom: 25px;
+      color: #cfd8dc;
     }
 
     input[type="text"] {
       width: 90%;
-      padding: 10px;
-      margin: 15px 0;
+      padding: 12px;
+      margin-bottom: 20px;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
+      font-size: 1em;
     }
 
     button {
-      padding: 10px 20px;
-      background: #00cc99;
+      padding: 12px 25px;
+      background: #00bfa5;
       border: none;
       color: white;
-      border-radius: 10px;
+      border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
+      font-size: 1em;
     }
 
     button:hover {
-      background: #00a377;
+      background: #008e76;
     }
 
     #linkGerado {
-      margin-top: 15px;
+      margin-top: 20px;
       word-break: break-word;
+      color: #c5e1a5;
     }
 
     #botaoWhatsapp {
       display: none;
-      margin-top: 15px;
-      padding: 10px 15px;
+      margin-top: 20px;
+      padding: 12px 20px;
       background: #25D366;
       color: white;
       text-decoration: none;
-      border-radius: 10px;
+      border-radius: 8px;
       font-weight: bold;
+      display: inline-block;
+    }
+
+    #areaMensagem p {
+      font-size: 1.2em;
+      margin: 20px 0;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Mensagem do Dia dos Pais</h1>
+    <h1>Homenagem para o Dia dos Pais</h1>
+    <p class="contexto">
+      Crie uma mensagem personalizada para homenagear seu pai ou alguém especial neste Dia dos Pais.
+      Digite o nome abaixo e compartilhe o link via WhatsApp. Ele verá uma linda mensagem com o nome dele!
+    </p>
 
     <div id="areaMensagem" style="display: none;">
       <p id="mensagem"></p>
@@ -71,6 +97,7 @@
 
     <div id="areaFormulario">
       <input type="text" id="nomePai" placeholder="Digite o nome do seu pai">
+      <br />
       <button onclick="gerarLink()">Gerar link</button>
       <p id="linkGerado"></p>
       <a id="botaoWhatsapp" target="_blank">📤 Compartilhar no WhatsApp</a>
