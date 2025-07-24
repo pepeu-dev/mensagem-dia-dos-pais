@@ -18,7 +18,7 @@
     }
 
     .overlay {
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.8);
       min-height: 100vh;
       padding: 40px 20px;
       display: flex;
@@ -27,29 +27,29 @@
     }
 
     .container {
-      max-width: 600px;
+      max-width: 700px;
       background: rgba(255, 255, 255, 0.08);
       padding: 30px 25px;
       border-radius: 15px;
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
 
     h1 {
-      font-size: 2em;
+      font-size: 2.4em;
       margin-bottom: 25px;
       color: #ffeb3b;
     }
 
     .mensagem-destaque {
-      font-size: 1.3em;
-      line-height: 1.6;
-      margin-bottom: 30px;
+      font-size: 1.6em;
+      line-height: 1.8;
+      margin: 30px 0;
       background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-radius: 10px;
+      padding: 25px;
+      border-radius: 12px;
       animation: fadeIn 1.2s ease-in-out;
-      box-shadow: 0 0 10px #ffc10788;
+      box-shadow: 0 0 14px #ffc107cc;
     }
 
     @keyframes fadeIn {
@@ -59,7 +59,7 @@
 
     .contexto {
       font-size: 1em;
-      margin-bottom: 25px;
+      margin-top: 30px;
       color: #dfe6e9;
     }
 
@@ -105,9 +105,14 @@
       display: inline-block;
     }
 
+    #previsualizacao {
+      display: none;
+      margin-top: 30px;
+    }
+
     @media (max-width: 600px) {
       .mensagem-destaque {
-        font-size: 1.1em;
+        font-size: 1.2em;
       }
     }
   </style>
@@ -117,6 +122,10 @@
     <div class="container">
       <h1>💙 Homenagem do Dia dos Pais</h1>
 
+      <div id="areaMensagem" style="display: none;">
+        <p id="mensagem" class="mensagem-destaque"></p>
+      </div>
+
       <div id="areaFormulario">
         <input type="text" id="nomePai" placeholder="Nome do pai que vai receber">
         <input type="text" id="nomeRemetente" placeholder="Seu nome (quem está enviando)">
@@ -124,19 +133,16 @@
         <button onclick="gerarLink()">Gerar link</button>
         <p id="linkGerado"></p>
         <a id="botaoWhatsapp" target="_blank">📤 Compartilhar no WhatsApp</a>
-      </div>
 
-      <!-- Pré-visualização da mensagem -->
-      <div id="previewMensagem" class="mensagem-destaque" style="display:none; margin-top: 20px;"></div>
-
-      <!-- Área da mensagem vinda por URL -->
-      <div id="areaMensagem" style="display: none;">
-        <p id="mensagem" class="mensagem-destaque"></p>
+        <div id="previsualizacao">
+          <h2 style="color: #ffd54f; margin-top: 40px;">Pré-visualização da mensagem:</h2>
+          <p id="previewTexto" class="mensagem-destaque"></p>
+        </div>
       </div>
 
       <p class="contexto">
         Crie uma mensagem personalizada e emocionante para homenagear seu pai.  
-        Digite o nome dele e o seu, gere o link e compartilhe com carinho. 👨‍👧‍👦❤️
+        Digite o nome dele e o seu, veja a prévia e compartilhe com carinho. 👨‍👧‍👦❤️
       </p>
     </div>
   </div>
@@ -156,26 +162,22 @@
         return;
       }
 
-      // Mensagem de pré-visualização
-      const mensagemPreview = `✉️ ${nomeRemetente} escreveu para ${nomePai}:\n\n${nomePai}, neste Dia dos Pais, quero te agradecer por tudo que fez e faz por mim.\nSua força, seus conselhos e seu amor me tornaram quem eu sou.\nVocê é meu exemplo, meu herói.\n\nCom carinho, ${nomeRemetente}. 👨‍👧‍👦❤️`;
-
-      const preview = document.getElementById("previewMensagem");
-      preview.innerText = mensagemPreview;
-      preview.style.display = "block";
-
-      // Link gerado
       const link = `${window.location.origin}${window.location.pathname}?nome=${encodeURIComponent(nomePai)}&de=${encodeURIComponent(nomeRemetente)}`;
       document.getElementById("linkGerado").innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
 
-      const mensagemWhatsapp = `Veja essa mensagem especial do Dia dos Pais:\n\n${link}`;
-      const whatsappLink = `https://wa.me/?text=${encodeURIComponent(mensagemWhatsapp)}`;
+      const mensagem = `Veja essa mensagem especial do Dia dos Pais:\n\n${link}`;
+      const whatsappLink = `https://wa.me/?text=${encodeURIComponent(mensagem)}`;
 
       const botao = document.getElementById("botaoWhatsapp");
       botao.href = whatsappLink;
       botao.style.display = "inline-block";
+
+      // Mostrar pré-visualização
+      const previewTexto = `✉️ ${nomeRemetente} enviou esta mensagem para você, ${nomePai}:\n\n${nomePai}, neste Dia dos Pais, quero te agradecer por tudo que fez e faz por mim.\nSua força, seus conselhos e seu amor me tornaram quem eu sou.\nVocê é meu exemplo, meu herói.\n\nCom carinho, ${nomeRemetente}. 👨‍👧‍👦❤️`;
+      document.getElementById("previewTexto").innerText = previewTexto;
+      document.getElementById("previsualizacao").style.display = "block";
     }
 
-    // Exibir mensagem personalizada se vier por URL
     const nomePaiURL = getParametroURL("nome");
     const nomeDeURL = getParametroURL("de");
     if (nomePaiURL && nomeDeURL) {
