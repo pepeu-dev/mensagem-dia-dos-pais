@@ -42,7 +42,7 @@
     }
 
     .mensagem-destaque {
-      font-size: 1.4em;
+      font-size: 1.3em;
       line-height: 1.6;
       margin-bottom: 30px;
       background: rgba(255, 255, 255, 0.1);
@@ -107,7 +107,7 @@
 
     @media (max-width: 600px) {
       .mensagem-destaque {
-        font-size: 1.2em;
+        font-size: 1.1em;
       }
     }
   </style>
@@ -122,7 +122,8 @@
       </div>
 
       <div id="areaFormulario">
-        <input type="text" id="nomePai" placeholder="Digite o nome do seu pai">
+        <input type="text" id="nomePai" placeholder="Nome do pai que vai receber">
+        <input type="text" id="nomeRemetente" placeholder="Seu nome (quem está enviando)">
         <br />
         <button onclick="gerarLink()">Gerar link</button>
         <p id="linkGerado"></p>
@@ -131,7 +132,7 @@
 
       <p class="contexto">
         Crie uma mensagem personalizada e emocionante para homenagear seu pai.  
-        Digite o nome, gere o link e compartilhe com quem sempre esteve do seu lado. 👨‍👧‍👦❤️
+        Digite o nome dele e o seu, gere o link e compartilhe com carinho. 👨‍👧‍👦❤️
       </p>
     </div>
   </div>
@@ -143,16 +144,18 @@
     }
 
     function gerarLink() {
-      const nome = document.getElementById("nomePai").value.trim();
-      if (nome === "") {
-        alert("Digite o nome do seu pai.");
+      const nomePai = document.getElementById("nomePai").value.trim();
+      const nomeRemetente = document.getElementById("nomeRemetente").value.trim();
+
+      if (!nomePai || !nomeRemetente) {
+        alert("Preencha os dois nomes para gerar a mensagem.");
         return;
       }
 
-      const link = `${window.location.origin}${window.location.pathname}?nome=${encodeURIComponent(nome)}`;
+      const link = `${window.location.origin}${window.location.pathname}?nome=${encodeURIComponent(nomePai)}&de=${encodeURIComponent(nomeRemetente)}`;
       document.getElementById("linkGerado").innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
 
-      const mensagem = `Veja essa mensagem para o Dia dos Pais:\n\n${link}`;
+      const mensagem = `Veja essa mensagem especial do Dia dos Pais:\n\n${link}`;
       const whatsappLink = `https://wa.me/?text=${encodeURIComponent(mensagem)}`;
 
       const botao = document.getElementById("botaoWhatsapp");
@@ -160,14 +163,14 @@
       botao.style.display = "inline-block";
     }
 
-    const nomeURL = getParametroURL("nome");
-    if (nomeURL) {
+    const nomePaiURL = getParametroURL("nome");
+    const nomeDeURL = getParametroURL("de");
+    if (nomePaiURL && nomeDeURL) {
+      const nomePai = decodeURIComponent(nomePaiURL);
+      const nomeRemetente = decodeURIComponent(nomeDeURL);
       const areaMensagem = document.getElementById("areaMensagem");
-      const nome = decodeURIComponent(nomeURL);
-      const mensagem = `💌 ${nome}, neste Dia dos Pais, quero te agradecer por tudo que fez e faz por mim.  
-      Sua força, seus conselhos e seu amor me tornaram quem eu sou.  
-      Você é meu exemplo, meu herói.  
-      Te amo demais! 👨‍👧‍👦❤️`;
+
+      const mensagem = `✉️ ${nomeRemetente} enviou esta mensagem para você, ${nomePai}:\n\n${nomePai}, neste Dia dos Pais, quero te agradecer por tudo que fez e faz por mim.\nSua força, seus conselhos e seu amor me tornaram quem eu sou.\nVocê é meu exemplo, meu herói.\n\nCom carinho, ${nomeRemetente}. 👨‍👧‍👦❤️`;
 
       areaMensagem.style.display = "block";
       document.getElementById("mensagem").innerText = mensagem;
