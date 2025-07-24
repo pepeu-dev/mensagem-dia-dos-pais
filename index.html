@@ -166,10 +166,10 @@
       const link = `${window.location.origin}${window.location.pathname}?nome=${encodeURIComponent(nomePai)}&de=${encodeURIComponent(nomeRemetente)}`;
       document.getElementById("linkGerado").innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
 
-      const mensagem = `📨 ${nomeRemetente} preparou com muito carinho esta homenagem especial de Dia dos Pais para você 💌❤️:
+      const mensagem = `${nomeRemetente} preparou com muito carinho esta homenagem especial de Dia dos Pais para você:
 
 ${link}`;
-      const whatsappLink = `https://wa.me/?text=${encodeURIComponent(mensagem)}`;
+      const whatsappLink = "https://wa.me/?text=" + encodeURIComponent(mensagem);
 
       const botao = document.getElementById("botaoWhatsapp");
       botao.href = whatsappLink;
@@ -195,3 +195,4 @@ ${link}`;
   </script>
 </body>
 </html>
+
