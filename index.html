@@ -117,10 +117,6 @@
     <div class="container">
       <h1>💙 Homenagem do Dia dos Pais</h1>
 
-      <div id="areaMensagem" style="display: none;">
-        <p id="mensagem" class="mensagem-destaque"></p>
-      </div>
-
       <div id="areaFormulario">
         <input type="text" id="nomePai" placeholder="Nome do pai que vai receber">
         <input type="text" id="nomeRemetente" placeholder="Seu nome (quem está enviando)">
@@ -128,6 +124,14 @@
         <button onclick="gerarLink()">Gerar link</button>
         <p id="linkGerado"></p>
         <a id="botaoWhatsapp" target="_blank">📤 Compartilhar no WhatsApp</a>
+      </div>
+
+      <!-- Pré-visualização da mensagem -->
+      <div id="previewMensagem" class="mensagem-destaque" style="display:none; margin-top: 20px;"></div>
+
+      <!-- Área da mensagem vinda por URL -->
+      <div id="areaMensagem" style="display: none;">
+        <p id="mensagem" class="mensagem-destaque"></p>
       </div>
 
       <p class="contexto">
@@ -152,17 +156,26 @@
         return;
       }
 
+      // Mensagem de pré-visualização
+      const mensagemPreview = `✉️ ${nomeRemetente} escreveu para ${nomePai}:\n\n${nomePai}, neste Dia dos Pais, quero te agradecer por tudo que fez e faz por mim.\nSua força, seus conselhos e seu amor me tornaram quem eu sou.\nVocê é meu exemplo, meu herói.\n\nCom carinho, ${nomeRemetente}. 👨‍👧‍👦❤️`;
+
+      const preview = document.getElementById("previewMensagem");
+      preview.innerText = mensagemPreview;
+      preview.style.display = "block";
+
+      // Link gerado
       const link = `${window.location.origin}${window.location.pathname}?nome=${encodeURIComponent(nomePai)}&de=${encodeURIComponent(nomeRemetente)}`;
       document.getElementById("linkGerado").innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
 
-      const mensagem = `Veja essa mensagem especial do Dia dos Pais:\n\n${link}`;
-      const whatsappLink = `https://wa.me/?text=${encodeURIComponent(mensagem)}`;
+      const mensagemWhatsapp = `Veja essa mensagem especial do Dia dos Pais:\n\n${link}`;
+      const whatsappLink = `https://wa.me/?text=${encodeURIComponent(mensagemWhatsapp)}`;
 
       const botao = document.getElementById("botaoWhatsapp");
       botao.href = whatsappLink;
       botao.style.display = "inline-block";
     }
 
+    // Exibir mensagem personalizada se vier por URL
     const nomePaiURL = getParametroURL("nome");
     const nomeDeURL = getParametroURL("de");
     if (nomePaiURL && nomeDeURL) {
